@@ -1,0 +1,78 @@
+{
+  "environment": {
+    "commitLimitGiB": 74.5,
+    "cpu": "NVIDIA RTX Spark N1X",
+    "driver": "616.62",
+    "engine": "Sparklet 内置引擎",
+    "engineVersion": "与 Sparklet 版本相同",
+    "gpu": "NVIDIA RTX Spark N1X（SM 12.1）",
+    "gpuDedicatedGiB": 62.44,
+    "gpuProcessBudgetGiB": 109.67,
+    "installedRamGiB": 128,
+    "memoryArchitecture": "windows-uma",
+    "notes": "容量是测试时的配置快照：GPU 专用区约一半，其余为 Windows 系统内存，共享区属于系统内存，不重复计算。",
+    "os": "Windows 11 Home ARM64 10.0.28000",
+    "powerMode": "未记录",
+    "runtime": "CUDA 13.4.3",
+    "sharedLimitGiB": 47.99,
+    "sparkletVersion": "0.1.0",
+    "systemVisibleRamGiB": 63.99
+  },
+  "evidence": [
+    "https://github.com/sparklet-si/sparklet/releases/tag/v0.1.0"
+  ],
+  "hardwareId": "nvidia-rtx-spark-n1x",
+  "id": "qwen3.8-flash-next-q2-k-rtx-spark-20261025",
+  "kind": "report",
+  "method": {
+    "memory": "服务 /api/state.resources 在加载后、生成后和卸载后采样，约每 2 秒一次，不是瞬时峰值。进程 GPU 用量加载后约 49.75 GiB，生成后约 50.72 GiB，卸载后约 0.59 GiB。",
+    "throughput": "(completion_tokens - 1) / (最后事件时间 - 首段内容时间)，单次热运行，不是持续负载。",
+    "workload": "10 项真实推理检查：中文算术、重复请求、JSON 与 SSE 一致性、相同 seed、停止词、断连恢复、超限拒绝、256 token 中文解释、长提示词检索、卸载。单请求、非 thinking、无跨请求 prefix cache。"
+  },
+  "modelId": "qwen3.8-flash-next-q2-k",
+  "revision": "db3a185731e162be9ffa4d52d20d7509939e60e8",
+  "samples": [
+    {
+      "batchSize": 1,
+      "concurrency": 1,
+      "contextTokens": 4096,
+      "decodeTps": 10.08,
+      "durationSeconds": 25.792,
+      "iterations": 1,
+      "kvCacheType": "BF16 普通 KV cache",
+      "notes": "中文解释 Rust 所有权，temperature=0。",
+      "outcome": "pass",
+      "outputTokens": 256,
+      "phase": "decode",
+      "prefillTps": null,
+      "processGpuPeakGiB": 50.72,
+      "processRssPeakGiB": null,
+      "promptTokens": 35,
+      "systemCommitPeakGiB": null,
+      "systemGpuDedicatedPeakGiB": 52.01,
+      "ttftMs": 487
+    },
+    {
+      "batchSize": 1,
+      "concurrency": 1,
+      "contextTokens": 4096,
+      "decodeTps": null,
+      "durationSeconds": 0,
+      "iterations": 1,
+      "kvCacheType": "BF16 普通 KV cache",
+      "notes": "长提示词标记检索，返回正确标记；耗时和内存未单独记录。",
+      "outcome": "pass",
+      "outputTokens": 7,
+      "phase": "prefill",
+      "prefillTps": null,
+      "processGpuPeakGiB": null,
+      "processRssPeakGiB": null,
+      "promptTokens": 1728,
+      "systemCommitPeakGiB": null,
+      "systemGpuDedicatedPeakGiB": null,
+      "ttftMs": null
+    }
+  ],
+  "schemaVersion": 1,
+  "testedAt": "2026-10-25"
+}

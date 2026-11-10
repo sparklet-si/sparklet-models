@@ -1,0 +1,729 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Published by the website workbench; never edited by hand. Clients ignore fields they do not know, so additions need no new schemaVersion.",
+  "properties": {
+    "architecture": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+    },
+    "curation": {
+      "additionalProperties": false,
+      "properties": {
+        "downloads30d": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "evidence": {
+          "items": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "type": "array"
+        },
+        "files": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "bytes": {
+                "maximum": 9007199254740991,
+                "minimum": 0,
+                "type": "integer"
+              },
+              "path": {
+                "maxLength": 500,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "bytes"
+            ],
+            "type": "object"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "type": "array"
+        },
+        "originCountry": {
+          "enum": [
+            "CN",
+            "US",
+            "FR",
+            "other",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "rank": {
+          "maximum": 9999,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "reviewedAt": {
+          "maxLength": 10,
+          "minLength": 10,
+          "type": "string"
+        }
+      },
+      "required": [
+        "originCountry",
+        "rank",
+        "reviewedAt",
+        "downloads30d",
+        "evidence",
+        "files"
+      ],
+      "type": "object"
+    },
+    "description": {
+      "maxLength": 800,
+      "minLength": 1,
+      "type": "string"
+    },
+    "downloads": {
+      "additionalProperties": false,
+      "properties": {
+        "cn": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "maxLength": 120,
+                "minLength": 1,
+                "type": "string"
+              },
+              "manifestSha256": {
+                "maxLength": 1000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "manifestUrl": {
+                "maxLength": 1000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "revision": {
+                "maxLength": 40,
+                "minLength": 1,
+                "pattern": "^[0-9a-f]{40}$",
+                "type": "string"
+              },
+              "url": {
+                "maxLength": 1000,
+                "minLength": 1,
+                "type": "string"
+              },
+              "verification": {
+                "enum": [
+                  "upstream",
+                  "sha256-manifest"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "label",
+              "url",
+              "revision",
+              "verification",
+              "manifestUrl",
+              "manifestSha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 8,
+          "minItems": 0,
+          "type": "array"
+        },
+        "global": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "label": {
+                "maxLength": 120,
+                "minLength": 1,
+                "type": "string"
+              },
+              "manifestSha256": {
+                "maxLength": 1000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "manifestUrl": {
+                "maxLength": 1000,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "revision": {
+                "maxLength": 40,
+                "minLength": 1,
+                "pattern": "^[0-9a-f]{40}$",
+                "type": "string"
+              },
+              "url": {
+                "maxLength": 1000,
+                "minLength": 1,
+                "type": "string"
+              },
+              "verification": {
+                "enum": [
+                  "upstream",
+                  "sha256-manifest"
+                ],
+                "type": "string"
+              }
+            },
+            "required": [
+              "label",
+              "url",
+              "revision",
+              "verification",
+              "manifestUrl",
+              "manifestSha256"
+            ],
+            "type": "object"
+          },
+          "maxItems": 8,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "global",
+        "cn"
+      ],
+      "type": "object"
+    },
+    "family": {
+      "maxLength": 200,
+      "minLength": 1,
+      "type": "string"
+    },
+    "format": {
+      "enum": [
+        "safetensors",
+        "gguf",
+        "pytorch+safetensors"
+      ],
+      "type": "string"
+    },
+    "hardware": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "match": {
+            "additionalProperties": false,
+            "description": "Set at publish time. A client that does not understand a key treats the entry as not matching.",
+            "properties": {
+              "arch": {
+                "maxLength": 40,
+                "minLength": 1,
+                "type": "string"
+              },
+              "gpuNames": {
+                "items": {
+                  "maxLength": 80,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                "maxItems": 8,
+                "minItems": 1,
+                "type": "array"
+              },
+              "os": {
+                "maxLength": 40,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "reportIds": {
+            "items": {
+              "maxLength": 100,
+              "minLength": 1,
+              "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+              "type": "string"
+            },
+            "maxItems": 64,
+            "minItems": 0,
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "unverified",
+              "tested",
+              "failed"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "status",
+          "reportIds"
+        ],
+        "type": "object"
+      },
+      "maxItems": 32,
+      "minItems": 0,
+      "type": "array"
+    },
+    "id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "inference": {
+      "additionalProperties": false,
+      "description": "Inference variant identity. Different decoding configurations require distinct model IDs and reports.",
+      "properties": {
+        "draftModel": {
+          "additionalProperties": false,
+          "properties": {
+            "repo": {
+              "maxLength": 200,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
+              "type": "string"
+            },
+            "revision": {
+              "maxLength": 40,
+              "minLength": 1,
+              "pattern": "^[0-9a-f]{40}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "repo",
+            "revision"
+          ],
+          "type": "object"
+        },
+        "features": {
+          "maxLength": 800,
+          "minLength": 1,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 120,
+          "minLength": 1,
+          "type": "string"
+        },
+        "performance": {
+          "maxLength": 800,
+          "minLength": 1,
+          "type": "string"
+        },
+        "speculativeDecoding": {
+          "enum": [
+            "none",
+            "mtp",
+            "dflash",
+            "other"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "speculativeDecoding",
+        "features",
+        "performance"
+      ],
+      "type": "object"
+    },
+    "inputs": {
+      "items": {
+        "enum": [
+          "text",
+          "image",
+          "audio"
+        ],
+        "type": "string"
+      },
+      "maxItems": 8,
+      "minItems": 1,
+      "type": "array"
+    },
+    "kind": {
+      "const": "model",
+      "type": "string"
+    },
+    "license": {
+      "description": "License tag declared by the upstream repository.",
+      "maxLength": 100,
+      "minLength": 1,
+      "type": "string"
+    },
+    "minSparkletVersion": {
+      "maxLength": 32,
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "name": {
+      "maxLength": 160,
+      "minLength": 1,
+      "type": "string"
+    },
+    "optimization": {
+      "additionalProperties": false,
+      "description": "Whether Sparklet has been tuned for this configuration. Independent of the tier.",
+      "properties": {
+        "status": {
+          "enum": [
+            "pending",
+            "optimized"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "type": "object"
+    },
+    "profiles": {
+      "description": "One concrete way to run this model: hardware class, engine, concurrency, and context to memory.",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "concurrency": {
+            "maximum": 1024,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "context": {
+            "additionalProperties": false,
+            "properties": {
+              "default": {
+                "maximum": 16777216,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "max": {
+                "maximum": 16777216,
+                "minimum": 1,
+                "type": "integer"
+              },
+              "modelLimit": {
+                "maximum": 16777216,
+                "minimum": 1,
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "presets": {
+                "items": {
+                  "maximum": 16777216,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "maxItems": 16,
+                "minItems": 1,
+                "type": "array"
+              }
+            },
+            "required": [
+              "default",
+              "max",
+              "presets"
+            ],
+            "type": "object"
+          },
+          "device": {
+            "enum": [
+              "cuda",
+              "cpu"
+            ],
+            "type": "string"
+          },
+          "engine": {
+            "description": "Engine id from inference-components.json, such as sparklet or llama.cpp.",
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string"
+          },
+          "estimate": {
+            "additionalProperties": false,
+            "description": "Linear planning estimate expanded into memory rows at publish time; a measured row at the same context replaces it.",
+            "properties": {
+              "gpuBaseGiB": {
+                "maximum": 1048576,
+                "minimum": 0,
+                "type": "number"
+              },
+              "gpuGiBPerKToken": {
+                "maximum": 1048576,
+                "minimum": 0,
+                "type": "number"
+              },
+              "method": {
+                "maxLength": 800,
+                "minLength": 1,
+                "type": "string"
+              },
+              "systemGiB": {
+                "maximum": 9007199254740991,
+                "minimum": 0,
+                "type": [
+                  "number",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "gpuBaseGiB",
+              "gpuGiBPerKToken",
+              "systemGiB",
+              "method"
+            ],
+            "type": "object"
+          },
+          "hardwareId": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+            "type": "string"
+          },
+          "kvCacheType": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "label": {
+            "maxLength": 120,
+            "minLength": 1,
+            "type": "string"
+          },
+          "memory": {
+            "items": {
+              "additionalProperties": false,
+              "properties": {
+                "basis": {
+                  "enum": [
+                    "measured",
+                    "vendor",
+                    "estimated"
+                  ],
+                  "type": "string"
+                },
+                "commitGiB": {
+                  "description": "Windows commit charge of the whole system at this point; independent of RSS and GPU.",
+                  "maximum": 9007199254740991,
+                  "minimum": 0,
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "contextTokens": {
+                  "maximum": 16777216,
+                  "minimum": 1,
+                  "type": "integer"
+                },
+                "gpuGiB": {
+                  "description": "Process GPU memory peak. Unknown stays null, never 0.",
+                  "maximum": 9007199254740991,
+                  "minimum": 0,
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "notes": {
+                  "maxLength": 400,
+                  "minLength": 0,
+                  "type": "string"
+                },
+                "outcome": {
+                  "enum": [
+                    "pass",
+                    "oom",
+                    "error"
+                  ],
+                  "type": "string"
+                },
+                "reportId": {
+                  "maxLength": 100,
+                  "minLength": 1,
+                  "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+                  "type": "string"
+                },
+                "systemGiB": {
+                  "description": "Process system memory (RSS) peak, excluding file cache where the engine maps tables.",
+                  "maximum": 9007199254740991,
+                  "minimum": 0,
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "contextTokens",
+                "gpuGiB",
+                "systemGiB",
+                "commitGiB",
+                "basis"
+              ],
+              "type": "object"
+            },
+            "maxItems": 32,
+            "minItems": 0,
+            "type": "array"
+          },
+          "notes": {
+            "maxLength": 800,
+            "minLength": 0,
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "hardwareId",
+          "engine",
+          "device",
+          "concurrency",
+          "kvCacheType",
+          "context",
+          "memory",
+          "notes"
+        ],
+        "type": "object"
+      },
+      "maxItems": 16,
+      "minItems": 0,
+      "type": "array"
+    },
+    "quantization": {
+      "maxLength": 80,
+      "minLength": 1,
+      "type": "string"
+    },
+    "requirements": {
+      "additionalProperties": false,
+      "properties": {
+        "diskBytes": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "notes": {
+          "maxLength": 1600,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "diskBytes",
+        "notes"
+      ],
+      "type": "object"
+    },
+    "schemaVersion": {
+      "const": 2,
+      "type": "integer"
+    },
+    "source": {
+      "additionalProperties": false,
+      "properties": {
+        "repo": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$",
+          "type": "string"
+        },
+        "revision": {
+          "maxLength": 40,
+          "minLength": 1,
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repo",
+        "revision"
+      ],
+      "type": "object"
+    },
+    "task": {
+      "enum": [
+        "language",
+        "asr",
+        "tts",
+        "ocr"
+      ],
+      "type": "string"
+    },
+    "tier": {
+      "description": "Set at publish time. compatible: tested. recommended: a compatible model chosen by hand.",
+      "enum": [
+        "compatible",
+        "recommended"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "name",
+    "description",
+    "family",
+    "architecture",
+    "task",
+    "format",
+    "quantization",
+    "source",
+    "downloads",
+    "requirements",
+    "hardware",
+    "profiles"
+  ],
+  "title": "Sparklet model variant",
+  "type": "object"
+}

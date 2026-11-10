@@ -1,0 +1,378 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "environment": {
+      "additionalProperties": false,
+      "properties": {
+        "commitLimitGiB": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "cpu": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "driver": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "engine": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "engineVersion": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "gpu": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "gpuDedicatedGiB": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "gpuProcessBudgetGiB": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "installedRamGiB": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "memoryArchitecture": {
+          "enum": [
+            "discrete",
+            "unified",
+            "windows-uma",
+            "cpu"
+          ],
+          "type": "string"
+        },
+        "notes": {
+          "maxLength": 1600,
+          "minLength": 1,
+          "type": "string"
+        },
+        "os": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "powerMode": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "runtime": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sharedLimitGiB": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "sparkletVersion": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "systemVisibleRamGiB": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "os",
+        "cpu",
+        "gpu",
+        "memoryArchitecture",
+        "installedRamGiB",
+        "systemVisibleRamGiB",
+        "gpuDedicatedGiB",
+        "sharedLimitGiB",
+        "gpuProcessBudgetGiB",
+        "commitLimitGiB",
+        "driver",
+        "runtime",
+        "engine",
+        "engineVersion",
+        "sparkletVersion",
+        "powerMode",
+        "notes"
+      ],
+      "type": "object"
+    },
+    "evidence": {
+      "items": {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string"
+      },
+      "maxItems": 8,
+      "minItems": 0,
+      "type": "array"
+    },
+    "hardwareId": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "id": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "kind": {
+      "const": "report",
+      "type": "string"
+    },
+    "method": {
+      "additionalProperties": false,
+      "properties": {
+        "memory": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "throughput": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "workload": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "throughput",
+        "memory",
+        "workload"
+      ],
+      "type": "object"
+    },
+    "modelId": {
+      "maxLength": 100,
+      "minLength": 1,
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$",
+      "type": "string"
+    },
+    "revision": {
+      "maxLength": 40,
+      "minLength": 1,
+      "pattern": "^[0-9a-f]{40}$",
+      "type": "string"
+    },
+    "samples": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "batchSize": {
+            "maximum": 65536,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "concurrency": {
+            "maximum": 1024,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "contextTokens": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "decodeTps": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "durationSeconds": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "number"
+          },
+          "iterations": {
+            "maximum": 1000000,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "kvCacheType": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "notes": {
+            "maxLength": 1600,
+            "minLength": 1,
+            "type": "string"
+          },
+          "outcome": {
+            "enum": [
+              "pass",
+              "oom",
+              "error"
+            ],
+            "type": "string"
+          },
+          "outputTokens": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "phase": {
+            "enum": [
+              "load",
+              "prefill",
+              "decode",
+              "sustained"
+            ],
+            "type": "string"
+          },
+          "prefillTps": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "processGpuPeakGiB": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "processRssPeakGiB": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "promptTokens": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "systemCommitPeakGiB": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "systemGpuDedicatedPeakGiB": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "ttftMs": {
+            "maximum": 9007199254740991,
+            "minimum": 0,
+            "type": [
+              "number",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "contextTokens",
+          "promptTokens",
+          "outputTokens",
+          "concurrency",
+          "batchSize",
+          "kvCacheType",
+          "phase",
+          "outcome",
+          "iterations",
+          "durationSeconds",
+          "decodeTps",
+          "prefillTps",
+          "ttftMs",
+          "processGpuPeakGiB",
+          "processRssPeakGiB",
+          "systemGpuDedicatedPeakGiB",
+          "systemCommitPeakGiB",
+          "notes"
+        ],
+        "type": "object"
+      },
+      "maxItems": 32,
+      "minItems": 1,
+      "type": "array"
+    },
+    "schemaVersion": {
+      "const": 1,
+      "type": "integer"
+    },
+    "testedAt": {
+      "maxLength": 10,
+      "minLength": 1,
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "modelId",
+    "hardwareId",
+    "revision",
+    "testedAt",
+    "environment",
+    "method",
+    "samples",
+    "evidence"
+  ],
+  "title": "Sparklet reproducible hardware report",
+  "type": "object"
+}

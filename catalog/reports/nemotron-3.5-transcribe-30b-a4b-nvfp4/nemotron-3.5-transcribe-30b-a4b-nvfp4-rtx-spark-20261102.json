@@ -1,0 +1,56 @@
+{
+  "environment": {
+    "commitLimitGiB": 128,
+    "cpu": "NVIDIA RTX Spark N1X",
+    "driver": "616.62",
+    "engine": "Sparklet 内置引擎",
+    "engineVersion": "与 Sparklet 版本相同",
+    "gpu": "NVIDIA RTX Spark N1X（SM 12.1）",
+    "gpuDedicatedGiB": 62.44,
+    "gpuProcessBudgetGiB": 109.67,
+    "installedRamGiB": 128,
+    "memoryArchitecture": "windows-uma",
+    "notes": "容量是测试时的配置快照，提交上限随分页文件变化，不代表额外物理显存。",
+    "os": "Windows 11 Home ARM64 10.0.28000",
+    "powerMode": "交流电源，GPU 处于约 663 MHz 的低频状态",
+    "runtime": "CUDA 13.4.3",
+    "sharedLimitGiB": 47.99,
+    "sparkletVersion": "0.1.1 之后的开发构建",
+    "systemVisibleRamGiB": 63.99
+  },
+  "evidence": [],
+  "hardwareId": "nvidia-rtx-spark-n1x",
+  "id": "nemotron-3.5-transcribe-30b-a4b-nvfp4-rtx-spark-20261102",
+  "kind": "report",
+  "method": {
+    "memory": "服务 /api/state.resources 在加载后、请求后和卸载后采样，是指定时点的用量，不是连续峰值。加载后 19.33 GiB，请求后 19.96 GiB，卸载后 0.24 GiB。",
+    "throughput": "墙钟时间，音频时长与耗时分开记录；未换算成 decode 速度。",
+    "workload": "HTTP 检查 31 项全部通过，覆盖中英文、多种音频格式、时间戳、流式返回和长音频。无投机解码。长音频 301 秒、3816 个提示 token，耗时 60.97 秒，WER 1.43%。"
+  },
+  "modelId": "nemotron-3.5-transcribe-30b-a4b-nvfp4",
+  "revision": "66c6adc4020179567074d0399cda2a4eeb2bb347",
+  "samples": [
+    {
+      "batchSize": 1,
+      "concurrency": 1,
+      "contextTokens": 16384,
+      "decodeTps": null,
+      "durationSeconds": 60.97,
+      "iterations": 1,
+      "kvCacheType": "BF16 普通 KV cache",
+      "notes": "301 秒长音频；输出 token 数未单独记录。低频状态下的结果，亮屏高频状态未测。",
+      "outcome": "pass",
+      "outputTokens": null,
+      "phase": "sustained",
+      "prefillTps": null,
+      "processGpuPeakGiB": 19.96,
+      "processRssPeakGiB": null,
+      "promptTokens": 3816,
+      "systemCommitPeakGiB": null,
+      "systemGpuDedicatedPeakGiB": null,
+      "ttftMs": null
+    }
+  ],
+  "schemaVersion": 1,
+  "testedAt": "2026-11-02"
+}

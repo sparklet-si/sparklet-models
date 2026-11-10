@@ -1,0 +1,133 @@
+{
+  "architecture": "qwen3.8",
+  "curation": {
+    "downloads30d": 1064465,
+    "evidence": [
+      "https://huggingface.co/unsloth/Qwen3.8-Flash-Next-GGUF/blob/766911a6b7369840a91dbcd95f9f997acaab6cd6/README.md"
+    ],
+    "files": [
+      {
+        "bytes": 10946624,
+        "path": "UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00001-of-00004.gguf"
+      },
+      {
+        "bytes": 49859583136,
+        "path": "UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00002-of-00004.gguf"
+      },
+      {
+        "bytes": 49376141504,
+        "path": "UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00003-of-00004.gguf"
+      },
+      {
+        "bytes": 12087983520,
+        "path": "UD-Q4_K_XL/Qwen3.8-Flash-Next-UD-Q4_K_XL-00004-of-00004.gguf"
+      }
+    ],
+    "originCountry": "CN",
+    "rank": 190,
+    "reviewedAt": "2026-10-27"
+  },
+  "description": "Qwen3.8-Flash-Next 的高容量 Q4 量化。完整网络和 n-gram 表都驻留 GPU，单机内存余量较紧。",
+  "downloads": {
+    "cn": [],
+    "global": [
+      {
+        "label": "Hugging Face · 固定版本",
+        "manifestSha256": null,
+        "manifestUrl": null,
+        "revision": "766911a6b7369840a91dbcd95f9f997acaab6cd6",
+        "url": "https://huggingface.co/unsloth/Qwen3.8-Flash-Next-GGUF/tree/766911a6b7369840a91dbcd95f9f997acaab6cd6",
+        "verification": "upstream"
+      }
+    ]
+  },
+  "family": "Qwen3.8",
+  "format": "gguf",
+  "hardware": [
+    {
+      "id": "nvidia-dgx-spark-gb10",
+      "match": {
+        "arch": "aarch64",
+        "gpuNames": [
+          "GB10"
+        ],
+        "os": "linux"
+      },
+      "name": "ASUS Ascent GX10 / DGX Spark (NVIDIA GB10) / Linux ARM64 / 128 GiB",
+      "reportIds": [
+        "qwen3.8-flash-next-ud-q4-k-xl-dgx-spark-20261025"
+      ],
+      "status": "tested"
+    },
+    {
+      "id": "nvidia-rtx-spark-n1x",
+      "match": {
+        "arch": "aarch64",
+        "gpuNames": [
+          "RTX Spark N1X"
+        ],
+        "os": "windows"
+      },
+      "name": "ASUS ProArt P14 H7407BA / NVIDIA RTX Spark N1X / Windows ARM64 / 128 GiB",
+      "reportIds": [],
+      "status": "unverified"
+    }
+  ],
+  "id": "qwen3.8-flash-next-ud-q4-k-xl",
+  "inputs": [
+    "text"
+  ],
+  "kind": "model",
+  "license": "qwen-community-1.0",
+  "minSparkletVersion": "0.1.0",
+  "name": "Qwen3.8-Flash-Next · Unsloth UD-Q4_K_XL",
+  "optimization": {
+    "status": "pending"
+  },
+  "profiles": [
+    {
+      "concurrency": 1,
+      "context": {
+        "default": 4096,
+        "max": 32768,
+        "modelLimit": 262144,
+        "presets": [
+          4096,
+          8192,
+          16384,
+          32768
+        ]
+      },
+      "device": "cuda",
+      "engine": "sparklet",
+      "hardwareId": "nvidia-dgx-spark-gb10",
+      "id": "dgx-spark-sparklet",
+      "kvCacheType": "BF16 paged KV cache",
+      "label": "DGX Spark · Sparklet 内置引擎",
+      "memory": [
+        {
+          "basis": "measured",
+          "commitGiB": null,
+          "contextTokens": 4096,
+          "gpuGiB": 105.92,
+          "outcome": "pass",
+          "reportId": "qwen3.8-flash-next-ud-q4-k-xl-dgx-spark-20261025",
+          "systemGiB": null
+        }
+      ],
+      "notes": "Linux 路径使用 paged KV cache，缓存按内存预算自动占用，所以 GPU 占用主要取决于预算，不随上下文线性变化。这里只列实测点，其他上下文未测。"
+    }
+  ],
+  "quantization": "UD-Q4_K_XL",
+  "requirements": {
+    "diskBytes": 111334654784,
+    "notes": "只下载 UD-Q4_K_XL/ 的 4 个分片。需要包含 GGUF 支持的服务。在 DGX Spark 的 4096 上下文、单请求下验收，全机 GPU 采样峰值约 106 GiB，系统可用内存最低约 9 GiB。RTX Spark 上还没有测试。"
+  },
+  "schemaVersion": 2,
+  "source": {
+    "repo": "unsloth/Qwen3.8-Flash-Next-GGUF",
+    "revision": "766911a6b7369840a91dbcd95f9f997acaab6cd6"
+  },
+  "task": "language",
+  "tier": "compatible"
+}

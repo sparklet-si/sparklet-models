@@ -1,0 +1,213 @@
+{
+  "architecture": "nemo_speechlm",
+  "curation": {
+    "downloads30d": 1940,
+    "evidence": [
+      "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-NVFP4/blob/66c6adc4020179567074d0399cda2a4eeb2bb347/README.md",
+      "https://github.com/NVIDIA-NeMo/Speech",
+      "https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3.5-Transcribe-Technical-Report.pdf"
+    ],
+    "files": [
+      {
+        "bytes": 2694,
+        "path": "LICENSE"
+      },
+      {
+        "bytes": 2305,
+        "path": "THIRD_PARTY_NOTICES.md"
+      },
+      {
+        "bytes": 12482,
+        "path": "chat_template.jinja"
+      },
+      {
+        "bytes": 472362,
+        "path": "config.json"
+      },
+      {
+        "bytes": 92,
+        "path": "generation_config.json"
+      },
+      {
+        "bytes": 31826,
+        "path": "hf_quant_config.json"
+      },
+      {
+        "bytes": 11343,
+        "path": "licenses/Qwen3-ASR-LICENSE.txt"
+      },
+      {
+        "bytes": 11357,
+        "path": "licenses/vLLM-LICENSE.txt"
+      },
+      {
+        "bytes": 2403,
+        "path": "llm_backbone/config.json"
+      },
+      {
+        "bytes": 9988250728,
+        "path": "model-00001-of-00002.safetensors"
+      },
+      {
+        "bytes": 9192549192,
+        "path": "model-00002-of-00002.safetensors"
+      },
+      {
+        "bytes": 201897998,
+        "path": "model-ctc-bf16.safetensors"
+      },
+      {
+        "bytes": 1335778712,
+        "path": "model-mtp-fp8.safetensors"
+      },
+      {
+        "bytes": 2587718,
+        "path": "model.safetensors.index.json"
+      },
+      {
+        "bytes": 838256800,
+        "path": "perception.safetensors"
+      },
+      {
+        "bytes": 17078144,
+        "path": "tokenizer.json"
+      },
+      {
+        "bytes": 11782,
+        "path": "tokenizer_config.json"
+      }
+    ],
+    "originCountry": "US",
+    "rank": 50,
+    "reviewedAt": "2026-10-31"
+  },
+  "description": "40 种语言离线转写、语音翻译、说话人区分与音频问答，可返回字词时间戳；不作为通用聊天模型。NVFP4 仅限 Blackwell。",
+  "downloads": {
+    "cn": [],
+    "global": [
+      {
+        "label": "Hugging Face · 固定版本",
+        "manifestSha256": null,
+        "manifestUrl": null,
+        "revision": "66c6adc4020179567074d0399cda2a4eeb2bb347",
+        "url": "https://huggingface.co/nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-NVFP4/tree/66c6adc4020179567074d0399cda2a4eeb2bb347",
+        "verification": "upstream"
+      }
+    ]
+  },
+  "family": "Nemotron 3.5",
+  "format": "safetensors",
+  "hardware": [
+    {
+      "id": "nvidia-dgx-spark-gb10",
+      "match": {
+        "arch": "aarch64",
+        "gpuNames": [
+          "GB10"
+        ],
+        "os": "linux"
+      },
+      "name": "ASUS Ascent GX10 / DGX Spark (NVIDIA GB10) / Linux ARM64 / 128 GiB",
+      "reportIds": [],
+      "status": "unverified"
+    },
+    {
+      "id": "nvidia-rtx-spark-n1x",
+      "match": {
+        "arch": "aarch64",
+        "gpuNames": [
+          "RTX Spark N1X"
+        ],
+        "os": "windows"
+      },
+      "name": "ASUS ProArt P14 H7407BA / NVIDIA RTX Spark N1X / Windows ARM64 / 128 GiB",
+      "reportIds": [
+        "nemotron-3.5-transcribe-30b-a4b-nvfp4-rtx-spark-20261102"
+      ],
+      "status": "tested"
+    }
+  ],
+  "id": "nemotron-3.5-transcribe-30b-a4b-nvfp4",
+  "inference": {
+    "features": "未启用 DFlash 或 MTP；保留 CTC 词级时间戳路线。其他语音任务及引擎限制沿用目标模型。",
+    "name": "常规解码（无 DFlash）",
+    "performance": "Sparklet 的原生推理路径已针对此配置优化。速度随 GPU 电源状态变化很大，实测见测试记录；不能套用 DFlash 或 MTP 的成绩。",
+    "speculativeDecoding": "none"
+  },
+  "inputs": [
+    "audio",
+    "text"
+  ],
+  "kind": "model",
+  "license": "openmdw-1.1",
+  "minSparkletVersion": "0.1.2",
+  "name": "Nemotron 3.5 Transcribe 30B-A4B · NVFP4 · 无 DFlash",
+  "optimization": {
+    "status": "optimized"
+  },
+  "profiles": [
+    {
+      "concurrency": 1,
+      "context": {
+        "default": 16384,
+        "max": 16384,
+        "modelLimit": null,
+        "presets": [
+          4096,
+          8192,
+          16384
+        ]
+      },
+      "device": "cuda",
+      "engine": "sparklet",
+      "estimate": {
+        "gpuBaseGiB": 19.33,
+        "gpuGiBPerKToken": 0.0385,
+        "method": "基础占用是模型加载后的实测，增长量由 16384 上下文长音频请求后的实测反推；较短上下文未实测。",
+        "systemGiB": null
+      },
+      "hardwareId": "nvidia-rtx-spark-n1x",
+      "id": "rtx-spark-sparklet",
+      "kvCacheType": "BF16 普通 KV cache",
+      "label": "RTX Spark · Sparklet 内置引擎",
+      "memory": [
+        {
+          "basis": "estimated",
+          "commitGiB": null,
+          "contextTokens": 4096,
+          "gpuGiB": 19.49,
+          "systemGiB": null
+        },
+        {
+          "basis": "estimated",
+          "commitGiB": null,
+          "contextTokens": 8192,
+          "gpuGiB": 19.65,
+          "systemGiB": null
+        },
+        {
+          "basis": "measured",
+          "commitGiB": null,
+          "contextTokens": 16384,
+          "gpuGiB": 19.96,
+          "outcome": "pass",
+          "reportId": "nemotron-3.5-transcribe-30b-a4b-nvfp4-rtx-spark-20261102",
+          "systemGiB": null
+        }
+      ],
+      "notes": "音频 token、文本提示和输出预算共同占用上下文，上下文决定能处理多长的音频。这些是指定时点的用量，不是连续峰值。"
+    }
+  ],
+  "quantization": "NVFP4",
+  "requirements": {
+    "diskBytes": 21576957938,
+    "notes": "本条固定为无投机解码，不含 DFlash2 草稿。Sparklet 原生推理，不需要 vLLM 或 Python，要求 CUDA 构建。上下文最高 16384：音频 token、文本提示和输出预算共同占用上下文，所以上下文决定能处理多长的音频。官方称此 NVFP4 的平均错误率较 BF16 相对高约 3.6%。在 RTX Spark 的短句、长音频和四路并发下通过验收；其他设备未测试。"
+  },
+  "schemaVersion": 2,
+  "source": {
+    "repo": "nvidia/NVIDIA-Nemotron-3.5-Transcribe-30B-A4B-NVFP4",
+    "revision": "66c6adc4020179567074d0399cda2a4eeb2bb347"
+  },
+  "task": "asr",
+  "tier": "recommended"
+}

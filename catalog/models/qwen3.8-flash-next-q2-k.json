@@ -1,0 +1,156 @@
+{
+  "architecture": "qwen3.8",
+  "curation": {
+    "downloads30d": 96102,
+    "evidence": [
+      "https://huggingface.co/bartowski/Qwen3.8-Flash-Next-GGUF/blob/db3a185731e162be9ffa4d52d20d7509939e60e8/README.md"
+    ],
+    "files": [
+      {
+        "bytes": 39992567104,
+        "path": "Qwen3.8-Flash-Next-Q2_K/Qwen3.8-Flash-Next-Q2_K-00001-of-00003.gguf"
+      },
+      {
+        "bytes": 39892013024,
+        "path": "Qwen3.8-Flash-Next-Q2_K/Qwen3.8-Flash-Next-Q2_K-00002-of-00003.gguf"
+      },
+      {
+        "bytes": 1042198944,
+        "path": "Qwen3.8-Flash-Next-Q2_K/Qwen3.8-Flash-Next-Q2_K-00003-of-00003.gguf"
+      }
+    ],
+    "originCountry": "CN",
+    "rank": 180,
+    "reviewedAt": "2026-10-27"
+  },
+  "description": "Qwen3.8-Flash-Next 的低比特量化，在单机 128 GiB 上容易放下。Q4_0 PLE 表按行映射读取，GPU 占用远小于文件大小；2-bit 的质量要按自己的任务评估。",
+  "downloads": {
+    "cn": [],
+    "global": [
+      {
+        "label": "Hugging Face · 固定版本",
+        "manifestSha256": null,
+        "manifestUrl": null,
+        "revision": "db3a185731e162be9ffa4d52d20d7509939e60e8",
+        "url": "https://huggingface.co/bartowski/Qwen3.8-Flash-Next-GGUF/tree/db3a185731e162be9ffa4d52d20d7509939e60e8",
+        "verification": "upstream"
+      }
+    ]
+  },
+  "family": "Qwen3.8",
+  "format": "gguf",
+  "hardware": [
+    {
+      "id": "nvidia-dgx-spark-gb10",
+      "match": {
+        "arch": "aarch64",
+        "gpuNames": [
+          "GB10"
+        ],
+        "os": "linux"
+      },
+      "name": "ASUS Ascent GX10 / DGX Spark (NVIDIA GB10) / Linux ARM64 / 128 GiB",
+      "reportIds": [],
+      "status": "unverified"
+    },
+    {
+      "id": "nvidia-rtx-spark-n1x",
+      "match": {
+        "arch": "aarch64",
+        "gpuNames": [
+          "RTX Spark N1X"
+        ],
+        "os": "windows"
+      },
+      "name": "ASUS ProArt P14 H7407BA / NVIDIA RTX Spark N1X / Windows ARM64 / 128 GiB",
+      "reportIds": [
+        "qwen3.8-flash-next-q2-k-rtx-spark-20261025"
+      ],
+      "status": "tested"
+    }
+  ],
+  "id": "qwen3.8-flash-next-q2-k",
+  "inputs": [
+    "text"
+  ],
+  "kind": "model",
+  "license": "qwen-community-1.0",
+  "minSparkletVersion": "0.1.0",
+  "name": "Qwen3.8-Flash-Next · Bartowski Q2_K",
+  "optimization": {
+    "status": "pending"
+  },
+  "profiles": [
+    {
+      "concurrency": 1,
+      "context": {
+        "default": 4096,
+        "max": 32768,
+        "modelLimit": 262144,
+        "presets": [
+          4096,
+          8192,
+          16384,
+          32768
+        ]
+      },
+      "device": "cuda",
+      "engine": "sparklet",
+      "estimate": {
+        "gpuBaseGiB": 50.52,
+        "gpuGiBPerKToken": 0.0458,
+        "method": "未实测长上下文。基础占用由 4096 上下文的实测反推（计算权重 48.54 GiB 加运行时占用）；普通 KV cache 随用量增长，48 层中 12 层全注意力保存 KV，每层每 token 1024 个元素，按 BF16 计 2 字节，再乘 2 覆盖注意力工作区。",
+        "systemGiB": null
+      },
+      "hardwareId": "nvidia-rtx-spark-n1x",
+      "id": "rtx-spark-sparklet",
+      "kvCacheType": "BF16 普通 KV cache",
+      "label": "RTX Spark · Sparklet 内置引擎",
+      "memory": [
+        {
+          "basis": "measured",
+          "commitGiB": null,
+          "contextTokens": 4096,
+          "gpuGiB": 50.72,
+          "outcome": "pass",
+          "reportId": "qwen3.8-flash-next-q2-k-rtx-spark-20261025",
+          "systemGiB": null
+        },
+        {
+          "basis": "estimated",
+          "commitGiB": null,
+          "contextTokens": 8192,
+          "gpuGiB": 50.9,
+          "systemGiB": null
+        },
+        {
+          "basis": "estimated",
+          "commitGiB": null,
+          "contextTokens": 16384,
+          "gpuGiB": 51.27,
+          "systemGiB": null
+        },
+        {
+          "basis": "estimated",
+          "commitGiB": null,
+          "contextTokens": 32768,
+          "gpuGiB": 52.02,
+          "systemGiB": null
+        }
+      ],
+      "notes": "Q4_0 PLE 表以文件映射按行读取，不计入 GPU，长提示词时会占用系统内存。GPU 分配同时消耗 Windows 提交额度：要同时留足 GPU 预算、物理内存和提交余量。8K 及以上只是估算，尚未验收。"
+    }
+  ],
+  "quantization": "Q2_K",
+  "requirements": {
+    "diskBytes": 80926779072,
+    "notes": "只下载 Qwen3.8-Flash-Next-Q2_K/ 的 3 个分片。需要包含 GGUF 支持的服务。文件体积不是运行内存，还要留出系统内存和提交余量。在 RTX Spark 的 4096 上下文、单请求下完整验收；更长上下文、并发和其他设备未验收。"
+  },
+  "schemaVersion": 2,
+  "source": {
+    "repo": "bartowski/Qwen3.8-Flash-Next-GGUF",
+    "revision": "db3a185731e162be9ffa4d52d20d7509939e60e8"
+  },
+  "task": "language",
+  "tier": "recommended"
+}
